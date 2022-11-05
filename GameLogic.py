@@ -5,18 +5,10 @@ import pygame
 pygame.init()
 screen = pygame.display.set_mode((800, 400))
 pygame.display.set_caption('We Suck At Naming Card Games')
+fps_clock = pygame.time.Clock()
 
-
-while True:
-    #actually runs game
-
-    for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
-
-    pygame.display.update()
-
+game_surface = pygame.Surface((100, 200))
+game_surface.fill('White')
 
 deck = list(
     itertools.product(range(1, 2), ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten']))
@@ -51,12 +43,21 @@ def get_hp(defense, hp):
     else:
         return hp
 
-
-player_one_attack = 20
-player_two_shield = 20
-
 get_cards()
 player_two_shield = get_shield(player_one_attack, player_two_shield)
 player_two_hp = get_hp(player_two_shield, player_two_hp)
 
 print(player_two_hp)
+
+while True:
+    # actually runs game
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+
+    screen.blit(game_surface, (0, 0))
+
+    pygame.display.update()
+    fps_clock.tick(60)
