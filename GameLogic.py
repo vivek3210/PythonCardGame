@@ -2,7 +2,21 @@ import itertools
 import random
 import pygame
 
-pygame.display.init()
+pygame.init()
+screen = pygame.display.set_mode((800, 400))
+pygame.display.set_caption('We Suck At Naming Card Games')
+
+
+while True:
+    #actually runs game
+
+    for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+
+    pygame.display.update()
+
 
 deck = list(
     itertools.product(range(1, 2), ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten']))
