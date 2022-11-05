@@ -13,7 +13,7 @@ card2 = pygame.image.load('graphics/cards/9_of_clubs.png')
 card3 = pygame.image.load('graphics/cards/5_of_clubs.png')
 
 deck = list(
-    itertools.product(range(1, 2), ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten']))
+    itertools.product(range(1, 2), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
 
 player_one_hp = 25
 player_one_shield = 0
@@ -32,7 +32,6 @@ def get_cards():
     print("You got:")
     for i in range(3):
         print(deck[i][0], "of", deck[i][1])
-
 
 def get_shield(atk, defense):
     defense -= atk
