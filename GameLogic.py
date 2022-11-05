@@ -3,12 +3,12 @@ import random
 import pygame
 
 pygame.init()
-screen = pygame.display.set_mode((800, 400))
+screen = pygame.display.set_mode((1280, 720))
+screen.fill('white')
 pygame.display.set_caption('We Suck At Naming Card Games')
 fps_clock = pygame.time.Clock()
 
-game_surface = pygame.Surface((100, 200))
-game_surface.fill('White')
+game_surface = pygame.image.load('graphics/cards/3_of_clubs.png')
 
 deck = list(
     itertools.product(range(1, 2), ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten']))
