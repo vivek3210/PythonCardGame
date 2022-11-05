@@ -8,7 +8,9 @@ screen.fill('white')
 pygame.display.set_caption('We Suck At Naming Card Games')
 fps_clock = pygame.time.Clock()
 
-game_surface = pygame.image.load('graphics/cards/3_of_clubs.png')
+card1 = pygame.image.load('graphics/cards/3_of_clubs.png')
+card2 = pygame.image.load('graphics/cards/9_of_clubs.png')
+card3 = pygame.image.load('graphics/cards/5_of_clubs.png')
 
 deck = list(
     itertools.product(range(1, 2), ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten']))
@@ -57,7 +59,9 @@ while True:
             pygame.quit()
             exit()
 
-    screen.blit(game_surface, (0, 0))
+    screen.blit(card1, (0, 0))
+    screen.blit(card2, (200, 0))
+    screen.blit(card3, (400, 0))
 
     pygame.display.update()
     fps_clock.tick(60)
