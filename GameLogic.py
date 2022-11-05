@@ -45,6 +45,7 @@ def get_hp(defense, hp):
     else:
         return hp
 
+
 get_cards()
 player_two_shield = get_shield(player_one_attack, player_two_shield)
 player_two_hp = get_hp(player_two_shield, player_two_hp)
