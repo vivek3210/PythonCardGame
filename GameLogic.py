@@ -33,14 +33,41 @@ def get_cards():
     for i in range(3):
         print(deck[i][0], "of", deck[i][1])
 
+
+def card_render(number):
+    if number == 1:
+        return pygame.image.load('graphics/cards/ace_of_diamonds.png')
+    elif number == 2:
+        return pygame.image.load('graphics/cards/2_of_diamonds.png')
+    elif number == 3:
+        return pygame.image.load('graphics/cards/3_of_diamonds.png')
+    elif number == 4:
+        return pygame.image.load('graphics/cards/4_of_diamonds.png')
+    elif number == 5:
+        return pygame.image.load('graphics/cards/5_of_diamonds.png')
+    elif number == 6:
+        return pygame.image.load('graphics/cards/6_of_diamonds.png')
+    elif number == 7:
+        return pygame.image.load('graphics/cards/7_of_diamonds.png')
+    elif number == 8:
+        return pygame.image.load('graphics/cards/8_of_diamonds.png')
+    elif number == 9:
+        return pygame.image.load('graphics/cards/9_of_diamonds.png')
+    elif number == 10:
+        return pygame.image.load('graphics/cards/10_of_diamonds.png')
+
+
+
 random.shuffle(deck)
-card1 = deck[0][0]
-card2 = deck[1][0]
-card3 = deck[2][0]
+card1 = deck[0][1]
+card2 = deck[1][1]
+card3 = deck[2][1]
 
 print(card1)
 print(card2)
 print(card3)
+
+
 def get_shield(atk, defense):
     defense -= atk
     return defense
@@ -56,7 +83,6 @@ def get_hp(defense, hp):
 player_two_shield = get_shield(player_one_attack, player_two_shield)
 player_two_hp = get_hp(player_two_shield, player_two_hp)
 
-
 while True:
     # actually runs game
 
@@ -64,6 +90,10 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+
+    card1render = card_render(card1)
+    card2render = card_render(card2)
+    card3render = card_render(card3)
 
     screen.blit(card1render, (0, 0))
     screen.blit(card2render, (200, 0))
