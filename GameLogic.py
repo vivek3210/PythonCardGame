@@ -33,6 +33,10 @@ def get_cards():
     for i in range(3):
         print(deck[i][0], "of", deck[i][1])
 
+card1 = deck[0][0]
+card2 = deck[1][0]
+card3 = deck[2][0]
+
 def get_shield(atk, defense):
     defense -= atk
     return defense
