@@ -57,7 +57,6 @@ def card_render(number):
         return pygame.image.load('graphics/cards/10_of_diamonds.png')
 
 
-
 random.shuffle(deck)
 card1 = deck[0][1]
 card2 = deck[1][1]
