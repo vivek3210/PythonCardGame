@@ -38,43 +38,43 @@ card3 = deck[2][1]
 def card_render(number):
     if number == 1:
         this_card1 = pygame.image.load('graphics/cards/ace_of_diamonds.png')
-        this_card1 = pygame.transform.scale(this_card1, (100, 200))
+        this_card1 = pygame.transform.scale(this_card1, (100, 145))
         return this_card1
     elif number == 2:
         this_card2 = pygame.image.load('graphics/cards/2_of_diamonds.png')
-        this_card2 = pygame.transform.scale(this_card2, (100, 200))
+        this_card2 = pygame.transform.scale(this_card2, (100, 145))
         return this_card2
     elif number == 3:
         this_card3 = pygame.image.load('graphics/cards/3_of_diamonds.png')
-        this_card3 = pygame.transform.scale(this_card3, (100, 200))
+        this_card3 = pygame.transform.scale(this_card3, (100, 145))
         return this_card3
     elif number == 4:
         this_card4 = pygame.image.load('graphics/cards/4_of_diamonds.png')
-        this_card4 = pygame.transform.scale(this_card4, (100, 200))
+        this_card4 = pygame.transform.scale(this_card4, (100, 145))
         return this_card4
     elif number == 5:
         this_card5 = pygame.image.load('graphics/cards/5_of_diamonds.png')
-        this_card5 = pygame.transform.scale(this_card5, (100, 200))
+        this_card5 = pygame.transform.scale(this_card5, (100, 145))
         return this_card5
     elif number == 6:
         this_card6 = pygame.image.load('graphics/cards/6_of_diamonds.png')
-        this_card6 = pygame.transform.scale(this_card6, (100, 200))
+        this_card6 = pygame.transform.scale(this_card6, (100, 145))
         return this_card6
     elif number == 7:
         this_card7 = pygame.image.load('graphics/cards/7_of_diamonds.png')
-        this_card7 = pygame.transform.scale(this_card7, (100, 200))
+        this_card7 = pygame.transform.scale(this_card7, (100, 145))
         return this_card7
     elif number == 8:
         this_card8 = pygame.image.load('graphics/cards/8_of_diamonds.png')
-        this_card8 = pygame.transform.scale(this_card8, (100, 200))
+        this_card8 = pygame.transform.scale(this_card8, (100, 145))
         return this_card8
     elif number == 9:
         this_card9 = pygame.image.load('graphics/cards/9_of_diamonds.png')
-        this_card9 = pygame.transform.scale(this_card9, (100, 200))
+        this_card9 = pygame.transform.scale(this_card9, (100, 145))
         return this_card9
     elif number == 10:
         this_card10 = pygame.image.load('graphics/cards/10_of_diamonds.png')
-        this_card10 = pygame.transform.scale(this_card10, (100, 200))
+        this_card10 = pygame.transform.scale(this_card10, (100, 145))
         return this_card10
 
 
