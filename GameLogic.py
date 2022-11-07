@@ -35,6 +35,7 @@ card1 = deck[0][1]
 card2 = deck[1][1]
 card3 = deck[2][1]
 
+
 def card_render(number):
     if number == 1:
         this_card1 = pygame.image.load('graphics/cards/ace_of_diamonds.png')
