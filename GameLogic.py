@@ -8,10 +8,6 @@ screen.fill('white')
 pygame.display.set_caption('We Suck At Naming Card Games')
 fps_clock = pygame.time.Clock()
 
-card1render = pygame.image.load('graphics/cards/3_of_clubs.png')
-card2render = pygame.image.load('graphics/cards/9_of_clubs.png')
-card3render = pygame.image.load('graphics/cards/5_of_clubs.png')
-
 deck = list(
     itertools.product(range(1, 2), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
 
