@@ -114,6 +114,39 @@ shuffle_icon = pygame.image.load('graphics/UI/Shuffle.png')
 shuffle_icon = pygame.transform.scale(shuffle_icon, (100, 100))
 shuffle_rect = shuffle_icon.get_rect(topleft=(590, 350))
 
+health_icon = pygame.image.load('graphics/UI/Heart.png')
+health_icon = pygame.transform.scale(health_icon, (100, 100))
+health_rect = health_icon.get_rect(topleft=(100, 100))
+
+shield_icon = pygame.image.load('graphics/UI/Shield.png')
+shield_icon = pygame.transform.scale(shield_icon, (140, 140))
+shield_rect = shield_icon.get_rect(topleft=(78, 200))
+
+health_icon2 = pygame.image.load('graphics/UI/Heart.png')
+health_icon2 = pygame.transform.scale(health_icon2, (100, 100))
+health_rect2 = health_icon2.get_rect(topleft=(1000, 100))
+
+shield_icon2 = pygame.image.load('graphics/UI/Shield.png')
+shield_icon2 = pygame.transform.scale(shield_icon2, (140, 140))
+shield_rect2 = shield_icon2.get_rect(topleft=(978, 200))
+
+font = pygame.font.SysFont('Arial', 30)
+text = font.render(str(player_one_hp), True, 'white')
+textRect = text.get_rect()
+textRect.center = (230, 140)
+
+text2 = font.render(str(player_two_hp), True, 'white')
+textRect2 = text2.get_rect()
+textRect2.center = (1130, 140)
+
+text3 = font.render(str(player_one_shield), True, 'white')
+textRect3 = text3.get_rect()
+textRect3.center = (230, 240)
+
+text4 = font.render(str(player_two_shield), True, 'white')
+textRect4 = text4.get_rect()
+textRect4.center = (1130, 240)
+
 while True:
     # actually runs game
 
@@ -128,6 +161,8 @@ while True:
 
     screen.fill("blue")
 
+    # renders everything
+
     card1render = card_render(card1)
     card2render = card_render(card2)
     card3render = card_render(card3)
@@ -136,6 +171,14 @@ while True:
     screen.blit(card2render, card2rect)
     screen.blit(card3render, card3rect)
     screen.blit(shuffle_icon, shuffle_rect)
+    screen.blit(health_icon, health_rect)
+    screen.blit(shield_icon, shield_rect)
+    screen.blit(health_icon2, health_rect2)
+    screen.blit(shield_icon2, shield_rect2)
+    screen.blit(text, textRect)
+    screen.blit(text2, textRect2)
+    screen.blit(text3, textRect3)
+    screen.blit(text4, textRect4)
 
     cursor = pygame.mouse.get_pos()
     cursor_click = pygame.mouse.get_pressed()
