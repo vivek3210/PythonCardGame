@@ -116,36 +116,52 @@ shuffle_rect = shuffle_icon.get_rect(topleft=(590, 350))
 
 health_icon = pygame.image.load('graphics/UI/Heart.png')
 health_icon = pygame.transform.scale(health_icon, (100, 100))
-health_rect = health_icon.get_rect(topleft=(100, 100))
+health_rect = health_icon.get_rect(topleft=(100, 50))
 
 shield_icon = pygame.image.load('graphics/UI/Shield.png')
 shield_icon = pygame.transform.scale(shield_icon, (140, 140))
-shield_rect = shield_icon.get_rect(topleft=(78, 200))
+shield_rect = shield_icon.get_rect(topleft=(78, 150))
 
 health_icon2 = pygame.image.load('graphics/UI/Heart.png')
 health_icon2 = pygame.transform.scale(health_icon2, (100, 100))
-health_rect2 = health_icon2.get_rect(topleft=(1000, 100))
+health_rect2 = health_icon2.get_rect(topleft=(1050, 50))
 
 shield_icon2 = pygame.image.load('graphics/UI/Shield.png')
 shield_icon2 = pygame.transform.scale(shield_icon2, (140, 140))
-shield_rect2 = shield_icon2.get_rect(topleft=(978, 200))
+shield_rect2 = shield_icon2.get_rect(topleft=(1028, 150))
+
+energy_icon = pygame.image.load('graphics/UI/Energy.png')
+energy_icon = pygame.transform.scale(energy_icon, (100, 100))
+energy_rect = energy_icon.get_rect(topleft=(100, 300))
+
+energy_icon2 = pygame.image.load('graphics/UI/Energy.png')
+energy_icon2 = pygame.transform.scale(energy_icon2, (100, 100))
+energy_rect2 = energy_icon2.get_rect(topleft=(1050, 300))
 
 font = pygame.font.SysFont('Arial', 30)
 text = font.render(str(player_one_hp), True, 'white')
 textRect = text.get_rect()
-textRect.center = (230, 140)
+textRect.center = (230, 90)
 
 text2 = font.render(str(player_two_hp), True, 'white')
 textRect2 = text2.get_rect()
-textRect2.center = (1130, 140)
+textRect2.center = (1025, 90)
 
 text3 = font.render(str(player_one_shield), True, 'white')
 textRect3 = text3.get_rect()
-textRect3.center = (230, 240)
+textRect3.center = (230, 190)
 
 text4 = font.render(str(player_two_shield), True, 'white')
 textRect4 = text4.get_rect()
-textRect4.center = (1130, 240)
+textRect4.center = (1025, 190)
+
+text5 = font.render(str(player_one_energy), True, 'white')
+textRect5 = text5.get_rect()
+textRect5.center = (230, 340)
+
+text6 = font.render(str(player_two_energy), True, 'white')
+textRect6 = text6.get_rect()
+textRect6.center = (1025, 340)
 
 while True:
     # actually runs game
@@ -175,10 +191,14 @@ while True:
     screen.blit(shield_icon, shield_rect)
     screen.blit(health_icon2, health_rect2)
     screen.blit(shield_icon2, shield_rect2)
+    screen.blit(energy_icon, energy_rect)
+    screen.blit(energy_icon2, energy_rect2)
     screen.blit(text, textRect)
     screen.blit(text2, textRect2)
     screen.blit(text3, textRect3)
     screen.blit(text4, textRect4)
+    screen.blit(text5, textRect5)
+    screen.blit(text6, textRect6)
 
     cursor = pygame.mouse.get_pos()
     cursor_click = pygame.mouse.get_pressed()
