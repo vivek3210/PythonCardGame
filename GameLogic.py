@@ -101,6 +101,71 @@ card1 = get_card()
 card2 = get_card()
 card3 = get_card()
 
+if card1 == 1:
+    cardString = "attack"
+elif card1 == 2:
+    cardString = "shield"
+elif card1 == 3:
+    cardString = "energy"
+elif card1 == 4:
+    cardString = "attack"
+elif card1 == 5:
+    cardString = "shield"
+elif card1 == 6:
+    cardString = "energy"
+elif card1 == 7:
+    cardString = "attack"
+elif card1 == 8:
+    cardString = "shield"
+elif card1 == 9:
+    cardString = "energy"
+elif card1 == 10:
+    cardString = "attack"
+
+if card2 == 1:
+    cardString2 = "attack"
+elif card2 == 2:
+    cardString2 = "shield"
+elif card2 == 3:
+    cardString2 = "energy"
+elif card2 == 4:
+    cardString2 = "attack"
+elif card2 == 5:
+    cardString2 = "shield"
+elif card2 == 6:
+    cardString2 = "energy"
+elif card2 == 7:
+    cardString2 = "attack"
+elif card2 == 8:
+    cardString2 = "shield"
+elif card2 == 9:
+    cardString2 = "energy"
+elif card2 == 10:
+    cardString2 = "attack"
+
+if card3 == 1:
+    cardString3 = "attack"
+elif card3 == 2:
+    cardString3 = "shield"
+elif card3 == 3:
+    cardString3 = "energy"
+elif card3 == 4:
+    cardString3 = "attack"
+elif card3 == 5:
+    cardString3 = "shield"
+elif card3 == 6:
+    cardString3 = "energy"
+elif card3 == 7:
+    cardString3 = "attack"
+elif card3 == 8:
+    cardString3 = "shield"
+elif card3 == 9:
+    cardString3 = "energy"
+elif card3 == 10:
+    cardString3 = "attack"
+
+
+
 card1render = card_render(card1)
 card1rect = card1render.get_rect(topleft=(480, 500))
 
@@ -165,7 +230,6 @@ textRect6.center = (1025, 340)
 
 while True:
     # actually runs game
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -270,6 +334,87 @@ while True:
             card3rect.y -= 10
             screen.blit(card3render, card3rect)
             card3selected = True
+
+    if card1selected and cardString == "attack" and mouse_down and click_timer <= 0:
+        player_two_hp -= card1
+        text2 = font.render(str(player_two_hp), True, 'white')
+        textRect2 = text2.get_rect()
+        textRect2.center = (1025, 90)
+        card1selected = False
+        card1rect.y += 10
+        click_timer = 30
+
+    if card2selected and cardString2 == "attack" and mouse_down and click_timer <= 0:
+        player_two_hp -= card2
+        text2 = font.render(str(player_two_hp), True, 'white')
+        textRect2 = text2.get_rect()
+        textRect2.center = (1025, 90)
+        card2selected = False
+        card2rect.y += 10
+        click_timer = 30
+
+    if card3selected and cardString3 == "attack" and mouse_down and click_timer <= 0:
+        player_two_hp -= card3
+        text2 = font.render(str(player_two_hp), True, 'white')
+        textRect2 = text2.get_rect()
+        textRect2.center = (1025, 90)
+        card3selected = False
+        card3rect.y += 10
+        click_timer = 30
+
+    if card1selected and cardString == "shield" and mouse_down and click_timer <= 0:
+        player_one_shield += card1
+        text3 = font.render(str(player_one_shield), True, 'white')
+        textRect3 = text3.get_rect()
+        textRect3.center = (230, 190)
+        card1selected = False
+        card1rect.y += 10
+        click_timer = 30
+
+    if card2selected and cardString2 == "shield" and mouse_down and click_timer <= 0:
+        player_one_shield += card2
+        text3 = font.render(str(player_one_shield), True, 'white')
+        textRect3 = text3.get_rect()
+        textRect3.center = (230, 190)
+        card2selected = False
+        card2rect.y += 10
+        click_timer = 30
+
+    if card3selected and cardString3 == "shield" and mouse_down and click_timer <= 0:
+        player_one_shield += card3
+        text3 = font.render(str(player_one_shield), True, 'white')
+        textRect3 = text3.get_rect()
+        textRect3.center = (230, 190)
+        card3selected = False
+        card3rect.y += 10
+        click_timer = 30
+
+    if card1selected and cardString == "energy" and mouse_down and click_timer <= 0:
+        player_one_energy += card1
+        text5 = font.render(str(player_one_energy), True, 'white')
+        card1selected = False
+        card1rect.y += 10
+        click_timer = 30
+
+    if card2selected and cardString2 == "energy" and mouse_down and click_timer <= 0:
+        player_one_energy += card2
+        text5 = font.render(str(player_one_energy), True, 'white')
+        card2selected = False
+        card2rect.y += 10
+        click_timer = 30
+
+    if card3selected and cardString3 == "energy" and mouse_down and click_timer <= 0:
+        player_one_energy += card3
+        text5 = font.render(str(player_one_energy), True, 'white')
+        card3selected = False
+        card3rect.y += 10
+        click_timer = 30
+
+    if player_two_hp <= 0:
+        text7 = font.render("You Win!", True, 'white')
+        textRect7 = text7.get_rect()
+        textRect7.center = (600, 300)
+        screen.blit(text7, textRect7)
 
     pygame.display.update()
     fps_clock.tick(60)
