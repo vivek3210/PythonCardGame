@@ -1,6 +1,7 @@
 import itertools
 import random
 import pygame
+import time
 
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
@@ -415,6 +416,11 @@ while True:
         textRect7 = text7.get_rect()
         textRect7.center = (600, 300)
         screen.blit(text7, textRect7)
+        #wait 10 seconds before exiting
+        pygame.display.update()
+        fps_clock.tick(60)
+        time.sleep(10)
+        pygame.quit()
 
     pygame.display.update()
     fps_clock.tick(60)
