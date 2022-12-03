@@ -13,14 +13,16 @@ deck = list(
     itertools.product(range(1, 2), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
 
 player_one_hp = 25
-player_one_shield = 0
+player_one_shield = 5
 player_one_attack = 0
 player_one_energy = 0
 
 player_two_hp = 25
-player_two_shield = 0
+player_two_shield = 5
 player_two_attack = 0
 player_two_energy = 0
+
+turn_string = "Player One"
 
 card1selected = False
 card2selected = False
@@ -165,8 +167,6 @@ elif card3 == 9:
 elif card3 == 10:
     cardString3 = "attack"
 
-
-
 card1render = card_render(card1)
 card1rect = card1render.get_rect(topleft=(480, 500))
 
@@ -179,6 +179,10 @@ card3rect = card1render.get_rect(topleft=(700, 500))
 shuffle_icon = pygame.image.load('graphics/UI/Shuffle.png')
 shuffle_icon = pygame.transform.scale(shuffle_icon, (100, 100))
 shuffle_rect = shuffle_icon.get_rect(topleft=(590, 350))
+
+play_icon = pygame.image.load('graphics/UI/Play.png')
+play_icon = pygame.transform.scale(play_icon, (100, 100))
+play_rect = play_icon.get_rect(topleft=(590, 200))
 
 health_icon = pygame.image.load('graphics/UI/Heart.png')
 health_icon = pygame.transform.scale(health_icon, (100, 100))
@@ -203,6 +207,18 @@ energy_rect = energy_icon.get_rect(topleft=(100, 300))
 energy_icon2 = pygame.image.load('graphics/UI/Energy.png')
 energy_icon2 = pygame.transform.scale(energy_icon2, (100, 100))
 energy_rect2 = energy_icon2.get_rect(topleft=(1050, 300))
+
+attack_icon_cards = pygame.image.load('graphics/UI/Sword.png')
+attack_icon_cards = pygame.transform.scale(attack_icon_cards, (40, 40))
+attack_rect_cards = attack_icon_cards.get_rect(center=(580, 500))
+
+shield_icon_cards = pygame.image.load('graphics/UI/Shield.png')
+shield_icon_cards = pygame.transform.scale(shield_icon_cards, (40, 40))
+shield_rect_cards = shield_icon_cards.get_rect(center=(690, 500))
+
+energy_icon_cards = pygame.image.load('graphics/UI/Energy.png')
+energy_icon_cards = pygame.transform.scale(energy_icon_cards, (40, 40))
+energy_rect_cards = energy_icon_cards.get_rect(center=(800, 500))
 
 font = pygame.font.SysFont('Arial', 30)
 text = font.render(str(player_one_hp), True, 'white')
@@ -229,6 +245,14 @@ text6 = font.render(str(player_two_energy), True, 'white')
 textRect6 = text6.get_rect()
 textRect6.center = (1025, 340)
 
+text6 = font.render(str(player_two_energy), True, 'white')
+textRect6 = text6.get_rect()
+textRect6.center = (1025, 340)
+
+turnText = font.render(str(turn_string), True, 'white')
+turnRect = turnText.get_rect()
+turnRect.center = (640, 100)
+
 while True:
     # actually runs game
     for event in pygame.event.get():
@@ -252,12 +276,27 @@ while True:
     screen.blit(card2render, card2rect)
     screen.blit(card3render, card3rect)
     screen.blit(shuffle_icon, shuffle_rect)
+    screen.blit(play_icon, play_rect)
+
     screen.blit(health_icon, health_rect)
     screen.blit(shield_icon, shield_rect)
     screen.blit(health_icon2, health_rect2)
     screen.blit(shield_icon2, shield_rect2)
     screen.blit(energy_icon, energy_rect)
     screen.blit(energy_icon2, energy_rect2)
+
+    screen.blit(energy_icon_cards, energy_rect_cards)
+    screen.blit(shield_icon_cards, shield_rect_cards)
+    screen.blit(attack_icon_cards, attack_rect_cards)
+
+    text = font.render(str(player_one_hp), True, 'white')
+    text2 = font.render(str(player_two_hp), True, 'white')
+    text3 = font.render(str(player_one_shield), True, 'white')
+    text4 = font.render(str(player_two_shield), True, 'white')
+    text5 = font.render(str(player_one_energy), True, 'white')
+    text6 = font.render(str(player_two_energy), True, 'white')
+    turnText = font.render(str(turn_string), True, 'white')
+
     screen.blit(text, textRect)
     screen.blit(text2, textRect2)
     screen.blit(text3, textRect3)
@@ -268,13 +307,92 @@ while True:
     cursor = pygame.mouse.get_pos()
     cursor_click = pygame.mouse.get_pressed()
 
+    # Win Condition
+    if player_two_hp <= 0 or player_two_hp <= 0:
+        if player_two_hp <= 0:
+            player_two_hp = 0
+            turn_string = "Player One"
+        else:
+            player_one_hp = 0
+            turn_string = "Player Two"
+        turnText = font.render(turn_string + " Wins!", True, 'white')
+        turnRect.center = (640, 100)
+        screen.blit(turnText, turnRect)
+        # wait 10 seconds before exiting
+        pygame.display.update()
+        fps_clock.tick(60)
+        time.sleep(10)
+        pygame.quit()
+
+    screen.blit(turnText, turnRect)
+
     click_timer -= 1  # Ensures there isn't always a selected card or repeated actions, the refresh was too fast before
 
+    # Shuffle Cards
     if shuffle_rect.collidepoint(cursor) and mouse_down and click_timer <= 0:
-        card1 = get_card()
-        card2 = get_card()
-        card3 = get_card()
-        click_timer = 30
+        if turn_string == "Player One":
+            if player_one_energy == 10:
+                card1 = get_card()
+                card2 = get_card()
+                card3 = get_card()
+                player_one_energy = 0
+                click_timer = 30
+        else:
+            if player_two_energy == 10:
+                card1 = get_card()
+                card2 = get_card()
+                card3 = get_card()
+                player_two_energy = 0
+                click_timer = 30
+
+    # Begins Turn
+    if play_rect.collidepoint(cursor) and mouse_down and click_timer <= 0:
+        if turn_string == "Player One":
+            player_one_attack = card1
+            player_one_shield += card2
+            player_one_energy += card3
+            player_two_shield -= player_one_attack
+
+            if player_two_shield < 0:
+                player_two_hp += player_two_shield
+                player_two_shield = 0
+
+            if player_one_shield > 10:
+                player_one_shield = 10
+
+            if player_one_energy > 10:
+                player_one_energy = 10
+
+            turn_string = "Player Two"
+
+            card1 = get_card()
+            card2 = get_card()
+            card3 = get_card()
+
+            click_timer = 30
+        else:
+            player_two_attack = card1
+            player_two_shield += card2
+            player_two_energy += card3
+            player_one_shield -= player_two_attack
+
+            if player_one_shield < 0:
+                player_one_hp += player_one_shield
+                player_one_shield = 0
+
+            if player_two_shield > 10:
+                player_two_shield = 10
+
+            if player_two_energy > 10:
+                player_two_energy = 10
+
+            turn_string = "Player One"
+
+            card1 = get_card()
+            card2 = get_card()
+            card3 = get_card()
+
+            click_timer = 30
 
     # Big else-if used to switch the cards around, feel free to optimize if you have any ideas
     if card1rect.collidepoint(cursor) and mouse_down and not card1selected and click_timer <= 0:
@@ -335,92 +453,6 @@ while True:
             card3rect.y -= 10
             screen.blit(card3render, card3rect)
             card3selected = True
-
-    if card1selected and cardString == "attack" and mouse_down and click_timer <= 0:
-        player_two_hp -= card1
-        text2 = font.render(str(player_two_hp), True, 'white')
-        textRect2 = text2.get_rect()
-        textRect2.center = (1025, 90)
-        card1selected = False
-        card1rect.y += 10
-        click_timer = 30
-
-    if card2selected and cardString2 == "attack" and mouse_down and click_timer <= 0:
-        player_two_hp -= card2
-        text2 = font.render(str(player_two_hp), True, 'white')
-        textRect2 = text2.get_rect()
-        textRect2.center = (1025, 90)
-        card2selected = False
-        card2rect.y += 10
-        click_timer = 30
-
-    if card3selected and cardString3 == "attack" and mouse_down and click_timer <= 0:
-        player_two_hp -= card3
-        text2 = font.render(str(player_two_hp), True, 'white')
-        textRect2 = text2.get_rect()
-        textRect2.center = (1025, 90)
-        card3selected = False
-        card3rect.y += 10
-        click_timer = 30
-
-    if card1selected and cardString == "shield" and mouse_down and click_timer <= 0:
-        player_one_shield += card1
-        text3 = font.render(str(player_one_shield), True, 'white')
-        textRect3 = text3.get_rect()
-        textRect3.center = (230, 190)
-        card1selected = False
-        card1rect.y += 10
-        click_timer = 30
-
-    if card2selected and cardString2 == "shield" and mouse_down and click_timer <= 0:
-        player_one_shield += card2
-        text3 = font.render(str(player_one_shield), True, 'white')
-        textRect3 = text3.get_rect()
-        textRect3.center = (230, 190)
-        card2selected = False
-        card2rect.y += 10
-        click_timer = 30
-
-    if card3selected and cardString3 == "shield" and mouse_down and click_timer <= 0:
-        player_one_shield += card3
-        text3 = font.render(str(player_one_shield), True, 'white')
-        textRect3 = text3.get_rect()
-        textRect3.center = (230, 190)
-        card3selected = False
-        card3rect.y += 10
-        click_timer = 30
-
-    if card1selected and cardString == "energy" and mouse_down and click_timer <= 0:
-        player_one_energy += card1
-        text5 = font.render(str(player_one_energy), True, 'white')
-        card1selected = False
-        card1rect.y += 10
-        click_timer = 30
-
-    if card2selected and cardString2 == "energy" and mouse_down and click_timer <= 0:
-        player_one_energy += card2
-        text5 = font.render(str(player_one_energy), True, 'white')
-        card2selected = False
-        card2rect.y += 10
-        click_timer = 30
-
-    if card3selected and cardString3 == "energy" and mouse_down and click_timer <= 0:
-        player_one_energy += card3
-        text5 = font.render(str(player_one_energy), True, 'white')
-        card3selected = False
-        card3rect.y += 10
-        click_timer = 30
-
-    if player_two_hp <= 0:
-        text7 = font.render("You Win!", True, 'white')
-        textRect7 = text7.get_rect()
-        textRect7.center = (600, 300)
-        screen.blit(text7, textRect7)
-        #wait 10 seconds before exiting
-        pygame.display.update()
-        fps_clock.tick(60)
-        time.sleep(10)
-        pygame.quit()
 
     pygame.display.update()
     fps_clock.tick(60)
